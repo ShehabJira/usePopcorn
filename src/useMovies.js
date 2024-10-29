@@ -17,13 +17,9 @@ export function useMovies(query) {
 					//while you are trying, if there are any errors may occur, through them to catch.
 					setIsLoading(true);
 					setError(""); // reset the error each time this function is called. to prevent catch from taking the previous error and print it.
-					const res = await fetch(
-						`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-						{ signal: controller.signal }
-					);
+					const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`, { signal: controller.signal });
 					// throw an error if fetching failed.
-					if (!res.ok)
-						throw new Error("Something went wrong with fetching movies");
+					if (!res.ok) throw new Error("Something went wrong with fetching movies");
 					const data = await res.json();
 					// throw an error if data is not found.
 					if (data.Response === "False")
